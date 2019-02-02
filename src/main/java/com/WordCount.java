@@ -26,6 +26,7 @@ import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.util.Collector;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Implements the "WordCount" program that computes a simple word occurrence histogram
@@ -89,13 +90,26 @@ public class WordCount {
 
         System.out.println("Application/Log: Correcting data type inconsistency in the field - Count");
 
-        for(Tuple2 tuplesOfWordAndCount:counts.collect()){
 
-            tuplesOfWordAndCount.f1 = tuplesOfWordAndCount.f1.toString();
 
-            listWithHeaderInfo.add(tuplesOfWordAndCount);
+        for(Tuple2<String,Integer> tuplesOfWordAndCount:counts.collect()){
 
+        	Tuple2<String,String> temporaryTuple = new Tuple2<String,String>();
+        	temporaryTuple.f0 = tuplesOfWordAndCount.f0;
+        	temporaryTuple.f1 = tuplesOfWordAndCount.f1.toString();
+
+            listWithHeaderInfo.add(temporaryTuple);
         }
+
+//        for (Iterator<Tuple2<String, Integer>> iter = counts.collect().iterator(); iter.hasNext(); ) {
+//            Tuple2<String,Integer> element = iter.next();erty 6h5tcx
+//
+//            Tuple2<String,String> temporaryTuple = new Tuple2<String,String>();
+//            temporaryTuple.f0 = element.f0;
+//            temporaryTuple.f0 = element.f1.toString();
+//            listWithHeaderInfo.add(temporaryTuple);
+//
+//        }
 
         System.out.println("Application/Log: Corrected data type consistency in the field - Count");
 
@@ -110,7 +124,8 @@ public class WordCount {
 
             System.out.println("Application/Log: Wrote to file: "+params.get("output"));
 
-            env.execute("WordCount App");
+            // execute program
+            env.execute("WordCount Example");
 
         } else {
 
