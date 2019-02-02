@@ -101,16 +101,6 @@ public class WordCount {
             listWithHeaderInfo.add(temporaryTuple);
         }
 
-//        for (Iterator<Tuple2<String, Integer>> iter = counts.collect().iterator(); iter.hasNext(); ) {
-//            Tuple2<String,Integer> element = iter.next();erty 6h5tcx
-//
-//            Tuple2<String,String> temporaryTuple = new Tuple2<String,String>();
-//            temporaryTuple.f0 = element.f0;
-//            temporaryTuple.f0 = element.f1.toString();
-//            listWithHeaderInfo.add(temporaryTuple);
-//
-//        }
-
         System.out.println("Application/Log: Corrected data type consistency in the field - Count");
 
         //final dataset of words and counts to be used for printing.
